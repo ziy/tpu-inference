@@ -1,0 +1,37 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Template for MMMU-pro evaluation
+dataset_path: MMMU/MMMU_Pro
+dataset_name: vision
+output_type: generate_until
+process_docs: !function utils.process_docs_mmmu
+doc_to_image: !function utils.doc_to_visual_mmmu
+doc_to_text: !function utils.doc_to_text_mmmu
+process_results: !function utils.process_results_mmmu
+doc_to_target: Answer         
+generation_kwargs:
+  until:
+    - "\n"
+    - "Answer:"
+  do_sample: false
+  temperature: 0
+  max_gen_toks: 16
+metric_list:
+  - metric: mmmu_pro_acc
+    aggregation: mean
+    higher_is_better: true
+num_fewshot: 0
+metadata:
+  version: 1.0

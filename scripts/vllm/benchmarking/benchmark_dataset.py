@@ -743,6 +743,7 @@ class MMMUProDataset(BenchmarkDataset):
         tokenizer: PreTrainedTokenizerBase,
         num_requests: int,
         output_len: Optional[int] = None,
+        chat_template_system_prompt: Optional[str] = None,
         **kwargs,
     ) -> list:
         samples: list = []
@@ -753,12 +754,20 @@ class MMMUProDataset(BenchmarkDataset):
             mm_content = self._images_to_mm_content(images or [])
 
             # Build message content: images first, then question text.
-            content: list = mm_content
-            content.append({"type": "text", "text": question_text})
-            messages = [{
+            user_content: list = mm_content
+            user_content.append({"type": "text", "text": question_text})
+
+            messages = []
+            if chat_template_system_prompt is not None:
+                messages.append({
+                    "role": "system",
+                    "content": chat_template_system_prompt
+                })
+
+            messages.append({
                 "role": "user",
-                "content": content,
-            }]
+                "content": user_content,
+            })
 
             new_output_len = output_len if output_len is not None else 16
 
