@@ -115,7 +115,7 @@ fi
 # Install mmmu_pro dependencies if needed
 if [[ "$TASKS" == *"mmmu_pro"* ]]; then
   echo "Detected MMMU-pro task: Installing development version of lm-eval for multimodal support..."
-  pip install "lm_eval[vllm] @ git+https://github.com/EleutherAI/lm-evaluation-harness.git"
+  pip install "lm_eval @ git+https://github.com/EleutherAI/lm-evaluation-harness.git"
 fi
 
 extra_json=""
