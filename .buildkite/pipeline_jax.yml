@@ -681,8 +681,8 @@ steps:
               --model_name "Qwen/Qwen2.5-VL-7B-Instruct" \
               --use_moe_ep_kernel 0 \
               --tensor_parallel_size 1 \
-              --max_model_len 16384 \
-              --max_num_batched_tokens 16384 \
+              --max_model_len 8192 \
+              --max_num_batched_tokens 8192 \
               --max_gen_toks 256 \
               --enable_expert_parallel 0 \
               --tasks "mmmu_pro" \
