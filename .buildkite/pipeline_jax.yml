@@ -681,7 +681,7 @@ steps:
               --model_name "Qwen/Qwen3-VL-8B-Instruct" \
               --use_moe_ep_kernel 0 \
               --tensor_parallel_size 8 \
-              --max_model_len 4096 \
+              --max_model_len 8192 \
               --max_num_batched_tokens 2048 \
               --max_gen_toks 256 \
               --enable_expert_parallel 0 \
