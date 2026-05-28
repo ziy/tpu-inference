@@ -21,8 +21,11 @@ import jax
 import jax.numpy as jnp
 import numpy as np
 from vllm.config import VllmConfig
+from vllm.model_executor.models.qwen2_5_vl import \
+    Qwen2_5_VLForConditionalGeneration
 from vllm.model_executor.models.qwen3_5 import \
     Qwen3_5MoeForConditionalGeneration
+from vllm.model_executor.models.qwen3_vl import Qwen3VLForConditionalGeneration
 
 from tpu_inference.logger import init_logger
 from tpu_inference.utils import to_jax_dtype
@@ -32,6 +35,8 @@ logger = init_logger(__name__)
 # Architectures whose embed_multimodal function is safe to wrap with jax.jit.
 JITTABLE_ARCHS = {
     Qwen3_5MoeForConditionalGeneration,
+    Qwen3VLForConditionalGeneration,
+    Qwen2_5_VLForConditionalGeneration,
 }
 
 
