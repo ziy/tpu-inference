@@ -37,6 +37,7 @@ usage() {
     echo "  --metric_name <metric>          (Generic) Metric name to check."
     echo "  --threshold <float>             (Generic) Threshold for the specified metric."
     echo "  --limit_mm_per_prompt <json>    (Optional) Limit multimodal items per prompt."
+    echo "  --mm_processor_kwargs <json>    (Optional) Multimodal processor arguments."
     echo "  --hf_overrides <json>           (Optional) HuggingFace overrides."
     echo "  --block_size <int>              (Optional) Block size."
     echo "  --limit <int>                   (Optional) Limit the number of examples evaluated (e.g., 10)."
@@ -60,6 +61,7 @@ NUM_FEWSHOT="8"
 METRIC_NAME=""
 THRESHOLD=""
 LIMIT_MM_PER_PROMPT=""
+MM_PROCESSOR_KWARGS=""
 HF_OVERRIDES=""
 BLOCK_SIZE=""
 LIMIT=""
@@ -83,6 +85,7 @@ while [[ "$#" -gt 0 ]]; do
         --metric_name) METRIC_NAME="$2"; shift ;;
         --threshold) THRESHOLD="$2"; shift ;;
         --limit_mm_per_prompt) LIMIT_MM_PER_PROMPT="$2"; shift ;;
+        --mm_processor_kwargs) MM_PROCESSOR_KWARGS="$2"; shift ;;
         --hf_overrides) HF_OVERRIDES="$2"; shift ;;
         --block_size) BLOCK_SIZE="$2"; shift ;;
         --limit) LIMIT="$2"; shift ;;
@@ -121,6 +124,9 @@ fi
 extra_json=""
 if [ -n "$LIMIT_MM_PER_PROMPT" ]; then
     extra_json+=$(printf ', "limit_mm_per_prompt": %s' "$LIMIT_MM_PER_PROMPT")
+fi
+if [ -n "$MM_PROCESSOR_KWARGS" ]; then
+    extra_json+=$(printf ', "mm_processor_kwargs": %s' "$MM_PROCESSOR_KWARGS")
 fi
 if [ -n "$HF_OVERRIDES" ]; then
     extra_json+=$(printf ', "hf_overrides": %s' "$HF_OVERRIDES")
