@@ -484,7 +484,7 @@ class Gemma4MultiTokenPredictor(JaxModule):
         hidden_states = self.pre_projection(combined)
 
         for i, layer in enumerate(self.layers):
-            layer_name = f"layer.{i}"
+            layer_name = f"draft_layer.{i}"
             if layer_name_to_kv_cache and layer_name in layer_name_to_kv_cache:
                 cache_idx = layer_name_to_kv_cache[layer_name]
             else:
